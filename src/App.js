@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import {createBrowserRouter ,RouterProvider} from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Layout from './components/Layout/Layout';
+import Home from './components/Home/Home';
+import Register from './components/Register/Register';
+import NotFound from './components/NotFound/NotFound';
+import Note from './components/Note/Note';
+import Search from './components/Search/Search';
+import Login from './components/Login/Login';
+import UserContextProvider from './Context/UserContext';
+import NoteContextProvider from './Context/NoteContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  
+  const route =  createBrowserRouter([
+    {path:'', element:<Layout/> , children:[
+      {path:'login' , element:<Login/> },
+      {path:'signup' , element:<Register/> },
+      {path:'*' , element:<NotFound/> },
+      {path:'' , index:true, element:<ProtectedRoute><Home/></ProtectedRoute> },
+      {path:'note' , index:true, element:<ProtectedRoute><Note/></ProtectedRoute> },
+      {path:'search' , index:true, element:<ProtectedRoute><Search/></ProtectedRoute> },
+    ]}
+  ]);
+
+  return <>
+    <UserContextProvider>
+     <NoteContextProvider>
+       <RouterProvider router={route}></RouterProvider>
+     </NoteContextProvider>
+    </UserContextProvider>
+  </>
+
 }
 
-export default App;
