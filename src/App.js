@@ -1,4 +1,4 @@
-import {createBrowserRouter ,RouterProvider} from 'react-router-dom'
+import {createHashRouter,RouterProvider} from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
@@ -12,12 +12,12 @@ import NoteContextProvider from './Context/NoteContext';
 
 export default function App() {
   
-  const route =  createBrowserRouter([
-    {path:'', element:<ProtectedRoute><Layout/></ProtectedRoute> , children:[
+  const route =  createHashRouter([
+    {path:'/', element:<ProtectedRoute><Layout/></ProtectedRoute> , children:[
       {path:'login' , element:<Login/> },
       {path:'signup' , element:<Register/> },
       {path:'*' , element:<NotFound/> },
-      {path:'' , index:true, element:<ProtectedRoute><Home/></ProtectedRoute> },
+      {path:'/' , index:true, element:<ProtectedRoute><Home/></ProtectedRoute> },
       {path:'note' , index:true, element:<ProtectedRoute><Note/></ProtectedRoute> },
       {path:'search' , index:true, element:<ProtectedRoute><Search/></ProtectedRoute> },
     ]}
