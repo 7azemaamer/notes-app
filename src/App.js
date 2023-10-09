@@ -13,7 +13,7 @@ import NoteContextProvider from './Context/NoteContext';
 export default function App() {
   
   const route =  createHashRouter([
-    {path:'/', element:<ProtectedRoute><Layout/></ProtectedRoute> , children:[
+    {path:'/', element:<Layout/> , children:[
       {path:'login' , element:<Login/> },
       {path:'signup' , element:<Register/> },
       {path:'*' , element:<NotFound/> },
