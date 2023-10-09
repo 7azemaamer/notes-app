@@ -13,7 +13,7 @@ import NoteContextProvider from './Context/NoteContext';
 export default function App() {
   
   const route =  createBrowserRouter([
-    {path:'', element:<Layout/> , children:[
+    {path:'', element:<ProtectedRoute><Layout/></ProtectedRoute> , children:[
       {path:'login' , element:<Login/> },
       {path:'signup' , element:<Register/> },
       {path:'*' , element:<NotFound/> },
